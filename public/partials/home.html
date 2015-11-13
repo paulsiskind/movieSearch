@@ -1,0 +1,21 @@
+
+
+ <div class="text-center">
+
+    <h1>Angular OMDB API Search</h1>
+    <br>
+    <h5>Enter a Movie Title</h5>
+    <form>
+      <input type="text" placeholder="Movie Title e.g Smokey and The Bandit" ng-model="search">
+      <br><br>
+      <button class="btn btn-success" ng-click="movieSearch()">Search <span class='glyphicon glyphicon-arrow-right'></span></button>
+    </form>
+ </div>
+ <div class="hr"></div>
+ <span ng-repeat="movie in movies">
+    <img ng-src="{{movie.Poster}}">
+    <p>{{movie.Title}}</p>
+    <p>{{movie.Released}}</p>
+<!--   <span ng-repeat="detail in details">
+    <p>{{detail.Plot}}</p> -->
+ {{search}}
