@@ -1,26 +1,37 @@
 var app = angular.module("movieApp", ['ngRoute'])
 
-  app.controller('HomeController', function($scope, $http){
+  app.controller('MovieController', function($scope, $http, $routeParams, $location){
     $scope.movieSearch = function(){
        console.log($scope.search)
-      $http.get('http://www.omdbapi.com/?s=' + $scope.search.toLowerCase() + '&r=json').then(function(data){
-        $scope.movies = data.data.Search;
-        console.log($scope.movie)
+      $http.get('http://www.omdbapi.com/?s=' + $scope.search.toLowerCase() + '&r=json').then(function (response){
+        console.log(response.data)
+        $scope.movies = response.data.Search;
       })
-       $http.get('http://www.omdbapi.com/?i=' + $scope.search.toLowerCase() + '&r=json').then(function (response) {
-          $scope.details = response.data;
-          console.log('Hello')
-        });
-     $scope.search ='';
+     $location.url('/movies/'+ $scope.search)
    }
-    
 
+ 
+      $http.get('http://www.omdbapi.com/?i=' + $routeParams.movieTitle+ '&r=json').then(function (response) {
+        console.log(response.data)
+          $scope.details = response.data;
+        });
+    
+     
   })
+
   app.config(function($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'partials/home.html',
-        controller: 'HomeController'
+      .when('/movies', {
+        templateUrl: 'partials/blank.html',
+        controller: 'MovieController'
+      })
+      .when('/movies/:movie', {
+        templateUrl: "partials/home.html",
+        controller: "MovieController"
+      })
+      .when('/:movieTitle/show', {
+        templateUrl: 'partials/show.html',
+        controller: 'MovieController'
       })
       .otherwise( {redirectTo: '/'
       })
@@ -28,19 +39,4 @@ var app = angular.module("movieApp", ['ngRoute'])
 
 });
 
-  //   app.controller('ChatController',['$scope', '$http', function($scope, $http){
-  //   $http.get('https://still-tundra-8387.herokuapp.com/').then(function(data){
-  //   $scope.chatData = data.data;
-  //    })
-  //   $scope.submit = function(){
-  //     var message = {
-  //       name: $scope.chat.name,
-  //    content: $scope.chat.comment};
-    
-  //   $http.post('https://still-tundra-8387.herokuapp.com/', {message: message}).then(function(data){
-  //  console.log(data.data)
-  //    },function(){})
-  //     $scope.chat = {};
-  // }
-
-  // }])
+ 

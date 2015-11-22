@@ -8,9 +8,26 @@
     <base href="/">
   <title></title>
 </head>
-<body>
+<body ng-controller="MovieController">
+
+
 <div class='container'>
+ <div class="text-center">
+
+    <h1>Angular OMDB API Search</h1>
+    <br>
+    <h5>Enter a Movie Title</h5>
+    <form>
+      <input type="text" placeholder="Movie Title e.g Smokey and The Bandit" ng-model="search">
+      <br><br>
+      <button class="btn btn-success" ng-click="movieSearch()">Search <span class='glyphicon glyphicon-arrow-right'></span></button>
+    </form>
+ </div>
+
+
+
   <div ng-view></div>
+
 </div>
 </body>
 </html>

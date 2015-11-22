@@ -9,3 +9,6 @@ a {
 .jumbotron{
   text-align: center;
 }
+.well, img{
+  width: 5%;
+}
